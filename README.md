@@ -1,1 +1,3 @@
-# 1stweb this is my first web repo (hopefuly eventually booking site for property rentals in Mexicali). I plan to use python, html, css, Google maps API, datetime, and aesthetic web interface, and more.
+# 1stweb 
+This is my first web repo (hopefuly eventually booking site for property rentals in Mexicali). 
+I plan to use python, html, css, Google maps API, datetime, and aesthetic web interface, and more.
