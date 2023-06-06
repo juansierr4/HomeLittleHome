@@ -3,7 +3,7 @@
 <head> <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-    <link rel="manifest" href="/site.webmanifest">>
+    <link rel="manifest" href="/site.webmanifest">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,10 +11,10 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class = "banner">
-        <div class ="navbar">
+<div class = "background">
+        <div class ="navbar"><a href = "index.html">
             
-            <img src="logo.png" alt = "home logo" class = "logo">
+            <img src="logo.png" alt = "home logo" class = "logo"></a>
             <ul>
                 <li><a href = "#">Home1</a></li>
                 <li><a href = "#">Home2</a></li>
@@ -27,7 +27,14 @@
             <div class="column"><a href="homelittlehome1.com/home2"><img src="home2.jpg" width="33%;"></a></div>
             <div class="column"><a href="homelittlehome1.com/home3"><img src="home3.jpg" width="33%;"></a></div>
 
-    </div>
+        </div>
+        <div class= "home1text"><a href ="#">Casa por la frontera</a> </div>
+        <div class= "home2text"><a href ="#">Apartamentos por la frontera</a> </div>
+        <div class= "home3text"><a href ="#">Apartamentos por la tortilleria</a> </div>
+        <div class= "maptext">Ubicacion de los 3 hogares</div>
+        <div class= "map"><a href="#"><img src="location1.png" width="40%;"height="350%;"></a></div>
+
+
     <script type = "text/javascript" src = "{{url_for('static', filename='index.js')}}"></script>
 </body>
 </html>
