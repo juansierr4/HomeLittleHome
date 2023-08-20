@@ -3,5 +3,4 @@
 
 Walmart version of Airbnb
 
-link: "C:\Users\jsier\Desktop\homelittlehome\templates\index.html"
 ----------------------------------------------------------------
