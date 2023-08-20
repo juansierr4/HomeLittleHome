@@ -65,8 +65,7 @@ html, body{
 
 .map {text-decoration:none;
     position:absolute;    
-
-    left:800px;
-    top:300px;
+    left:50%;
+    top:30%;
     width:90%;
-    height:100px;}
+    height:40%%;}
