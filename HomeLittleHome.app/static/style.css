@@ -1,0 +1,216 @@
+*{
+    margin:0;
+    padding:0;
+    font-family:sans-serif;
+}
+
+html, body{
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+.background{
+    width:100%;
+    height:100%;
+    background-image:url(background.jpg);
+    background-size: contain;
+    background-position: center;
+    position: relative;
+}
+
+.navbar{
+    width:85%;
+    margin:auto;
+    padding:35px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo{
+    width:50px;
+    cursor:pointer;
+}
+
+.navbar ul li{
+    list-style:none;
+    display:inline-block;
+    margin: 0 20px;
+    position:relative;
+}
+
+.navbar ul li a{
+    text-decoration: none;
+    color: #fff;
+    text-transform:uppercase;
+}
+
+.navbar ul li::after{
+    content: '';
+    height:3px;
+    width: 0;
+    background:#f5ec68;
+    position: absolute;
+    left:0;
+    bottom:-10px;
+    transition:0.5s;
+}
+
+.navbar ul li:hover::after{
+    width:100%;
+
+}
+
+.column {margin-left: 10px; margin-bottom: 5px;}
+
+.map {text-decoration:none;
+    position:relative;    
+    left:50%;
+    top:30%;
+    width:90%;
+    height:40%;}
+
+    .contact {
+        color: white;
+    }
+
+/*-----------------------home 3 slideshow styling----------------------------------*/
+* {box-sizing:border-box}
+
+/* Slideshow container */
+.slideshow-container {
+  
+  position: relative;
+  margin: auto;
+}
+
+/* Hide the images by default */
+.mySlides {
+  display: none;
+}
+
+/* Next & previous buttons */
+.prev, .next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  margin-top: -22px;
+  padding: 16px;
+  color: rgb(26, 26, 26);
+  background-color:#f5ec68;
+  font-weight: bold;
+  font-size: 18px;
+  transition: 2s ease;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+}
+
+/* Position the "next button" to the right */
+.next {
+    right: 40%;
+    border-radius: 3px 0 0 3px;
+  }
+
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover, .next:hover {
+  background-color: rgba(0,0,0,0.8);
+}
+
+/* Caption text */
+.text {
+  color: #56430b;
+  background-color:#fff;
+  font-weight: bold;
+  font-size: 15px;
+  padding: 8px 12px;
+  position: absolute;
+  bottom: 8px;
+  width: 9%;
+  left: 22.5%;
+}
+
+/* Number text (1/3 etc) */
+.numbertext {
+  color: #f2f2f2;
+  font-size: 12px;
+  padding: 8px 12px;
+  position: absolute;
+  top: 0;
+}
+
+.slidepic {
+    width:60%;
+    height:75vh;
+    overflow: hidden;
+}
+
+/* The dots/bullets/indicators */
+.dot {
+  cursor: pointer;
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #d6ce73a9;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+  position: relative;
+  right: 23%;
+
+}
+
+.active, .dot:hover {
+  background-color: #131010cc;
+}
+
+/* Fading animation */
+.fade {
+  animation-name: fade;
+  animation-duration: 360s;
+}
+
+@keyframes fade {
+  from {opacity: .95}
+  to {opacity: 1}
+}
+/*----------------------------------end of home 3 styling---------------------*/
+/* Media query for landscape orientation */
+@media screen and (orientation: landscape) {
+  /* Update styles for landscape orientation */
+  .background {
+    background-size: contain;
+  }
+
+  .map {
+    text-decoration:none;
+    position:absolute;    
+    left:50%;
+    top:30%;
+    width:90%;
+    height:40%;
+  }
+
+}
+
+/* Media query for portrait orientation */
+@media screen and (orientation: portrait) {
+  /* Update styles for portrait orientation */
+  .background {
+    background-size: cover;
+  }
+  .map {
+    text-decoration:none;
+    position:relative;    
+    left:50%;
+    top:-250px;
+    width:100%;
+    height:200px;
+  }
+  .column {
+    margin-left: 10px; 
+    margin-bottom: 5px;
+    size:200vh;
+    }
+
+  }
