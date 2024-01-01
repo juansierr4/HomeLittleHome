@@ -1,11 +1,11 @@
 
 from flask import Flask, render_template, url_for
 from datetime import timedelta
-from flask_sqlalchemy import SQLAlchemy
+#from flask_sqlalchemy import SQLAlchemy
 
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite://Users/jsier/Desktop/homelittlehome/og_database.db'
+#app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite://Users/jsier/Desktop/homelittlehome/og_database.db'
 
 
 #default route and route function returning the main screen (index)
@@ -37,5 +37,5 @@ def login():
 #if __name__ == '__main__':
     #with app.app_context():
        #db.create_all()
-app.run(debug=True) #automatically detects changes
+#app.run(debug=True) #automatically detects changes
     
