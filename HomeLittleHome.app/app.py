@@ -5,23 +5,8 @@ from flask_sqlalchemy import SQLAlchemy
 
 
 app = Flask(__name__)
-app.secret_key = "hello"
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite://Users/jsier/Desktop/homelittlehome/og_database.db'
-app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-app.permanent_session_lifetime = timedelta(minutes = 5)
 
-#db = SQLAlchemy(app)
-
-#class users(db.Model):
-    #_id = db. Column("id", db.Integer, primary_key = True)
-    #name = db.Column(db.String(100))
-    #email = db.Column(db.String(100))
-
-    #def __init__(self, name, email):
-        #self.name = name
-        #self.email = email 
-
-#table for the database with id column, username column, and password column
 
 #default route and route function returning the main screen (index)
 @app.route('/')
