@@ -8,17 +8,26 @@ html, body{
 }
 
 .background{
+  display: flex;
+  align-items: center; /* Center vertically */
+  justify-content: center; /* Center horizontally */
   min-height: 100vh;
-  background-image:url('background.jpg');
+  background-image: url('background.jpg');
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
   position: relative;
+  padding-top: 60px;
 }
 
 .logo{
   width:40px;
   cursor:pointer;
+  display: block;
+  position: fixed; /* Fixed position */
+  top: 15px; /* Same top value as your hamburger menu */
+  left: 15px; /* Add some space from the left edge */
+  z-index: 99999; /* Ensure it's above other items */
 }
 
 .hamburger-menu {
@@ -76,10 +85,16 @@ html, body{
   width:100%;
 
 }
-
-
 .nav-toggle:checked ~ .mobile-nav {
   display: block;
+}
+.background .home-link .logo {
+  display: block; /* default state */
+}
+
+/* Hide logo when nav-toggle is checked - also with increased specificity */
+.background #nav-toggle:checked ~ .home-link .logo {
+  display: none;
 }
 .mobile-nav ul li a {
   /* ... existing styles ... */
@@ -97,6 +112,8 @@ html, body{
 
 
 .column {
+  max-height:calc(100vh - 60px);
+  overflow-y:auto;
   padding-top:60px;
   float: left;
   width: 60%;
@@ -157,16 +174,18 @@ background-color: rgba(0,0,0,0.8);
 
 /* Caption text */
 .text {
-color: #56430b;
-background-color:#fff;
-font-weight: bold;
-font-size: 15px;
-padding: 8px 12px;
-position: absolute;
-bottom: 5vh;
-width: 60%;
-left: 50%;
-transform:translateX(-50%);
+  color: #56430b;
+  background-color: white; /* Semi-transparent white background */
+  font-weight: bold;
+  font-size: 15px;
+  padding: 8px 16px; /* Add padding to create some space around the text */
+  position: absolute;
+  bottom: 10px; /* Position from the bottom of the .mySlides container */
+  left: 10px; /* Position from the left of the .mySlides container */
+  transform: none; /* Remove the translateX transformation */
+  border-radius: 5px; /* Adjust as necessary for rounded corners */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Optional: Adds a subtle shadow for depth */
+  text-align: left; /* Aligns the text inside the .text container */
 }
 
 /* Number text (1/3 etc) */
@@ -184,18 +203,24 @@ top: 0;
   overflow: hidden;
 }
 
+.dot-container{
+  text-align: center;
+  position: absolute;
+  width: 100%;
+  bottom:6vh; /* Position the dots at the bottom of the slideshow */
+}
+
+
 /* The dots/bullets/indicators */
 .dot {
-cursor: pointer;
-height: 15px;
-width: 15px;
-margin: 0 2px;
-background-color: #d6ce73a9;
-border-radius: 50%;
-display: inline-block;
-transition: background-color 0.6s ease;
-position: relative;
-right: 23%;
+  cursor: pointer;
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #d6ce73a9;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
 
 }
 
@@ -204,7 +229,9 @@ background-color: #131010cc;
 }
 
 
-.mySlides { display: none; }
+.mySlides {position: relative;
+  width: 100%; /* Set the width to match the image width */
+  margin: auto; /* This will center the slide if the slideshow-container is wider than the images */}
 .prev, .next {
   cursor: pointer;
   position: absolute;
@@ -222,20 +249,14 @@ background-color: #131010cc;
 }
 
 .next {
-  right: 0;
+  right: 48vh; /* Adjust this value as needed to bring the arrow closer to the image */
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
   border-radius: 3px 0 0 3px;
 }
 
 .prev:hover, .next:hover { background-color: #f1f1f1; }
-.text {
-  color: black;
-  font-size: 15px;
-  padding: 8px 12px;
-  position: absolute;
-  bottom: 8px;
-  width: 100%;
-  text-align: center;
-}
 
 .numbertext {
   color: #f2f2f2;
@@ -260,20 +281,70 @@ background-color: #131010cc;
 .fade { animation-name: fade; animation-duration: 6000000000000s; }
 @keyframes fade { from {opacity: 1} to {opacity: .9999} }
 
+.signup-container {
+  background: rgba(255, 255, 255, 0.8);
+  max-width: 400px;
+  margin: 50px auto;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.signup-form {
+  display: flex;
+  flex-direction: column;
+  color:white;
+  margin-top:0;
+}
+
+.signup-form .form-group {
+  margin-bottom: 15px;
+
+}
+
+.signup-form .form-group label {
+  display: block;
+  margin-bottom: 5px;
+  color: white;
+}
+
+.signup-form .form-group input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.signup-btn {
+  background-color: #f5ec68;
+  color: #56430b;
+  border: none;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.signup-btn:hover {
+  background-color: #e5db62;
+}
 
 
 
+/***************************************************************************/
 
 
 @media screen and (max-width: 600px) {
   .column div a img {
-    max-height: 10% ; /* or any size that fits well */
-    width: 50% !important; /* maintain aspect ratio */
+    min-height: 20vh ; /* or any size that fits well */
+    width: 30vh !important; /* maintain aspect ratio */
     display: block;
     margin: -40 auto; /* center images if not full width */
   }
   .map img {
-    max-height: 150px; /* adjust as needed */
+    max-height: 100px; /* adjust as needed */
     width: auto; /* maintain aspect ratio */
   }
   .column {
@@ -283,7 +354,7 @@ background-color: #131010cc;
 
   }
   .hamburger-menu { display: block; z-index: 9999;}
-  .background { min-height: 100vh;}
+  .background { min-height: 100vh; align-items: flex-start; padding-top:100px;}
   .background::before, .background::after { content: none; }
   .navbar ul { display: none; }
   .navbar { flex-direction: column; align-items: center; width: 100%; padding: 10px 0; }

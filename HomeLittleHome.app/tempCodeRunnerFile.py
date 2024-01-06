@@ -2,7 +2,6 @@
 from flask import Flask, render_template, url_for
 from datetime import timedelta
 from flask_sqlalchemy import SQLAlchemy
-from datetime import datetime
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://jsier:password@localhost:3306/hlhdb'
@@ -13,8 +12,6 @@ db = SQLAlchemy(app)
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(80), unique=True, nullable=False)
-    email = db.Column(db.String(100), unique = True, nullable=False)
-    date_joined = db.Column(db.Date, default=datetime.utcnow)
 
 @app.route('/')
 def index():

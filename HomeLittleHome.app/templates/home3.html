@@ -16,18 +16,27 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class = "background">
-        <div class ="navbar"><a href = "{{url_for('index') }}">
-            
-            <img src="/static/logo.png" alt = "home logo" class = "logo"></a>
-            <ul>
-                <li><a href = "{{url_for('home1') }}">Home1</a></li>
-                <li><a href = "{{url_for('home2') }}">Home2</a></li>
-                <li><a href = "{{url_for('home3') }}">Home3</a></li>
-                <li class="contact"><a href = "https://www.airbnb.com/users/show/265716900">Contact me at +52 (686) 471-4444</a></li>
+  <div class="background">
+    
+    <input type="checkbox" id="nav-toggle" class="nav-toggle" style="display: none;">
+    <label for="nav-toggle" class="hamburger-menu">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+    </label>
+    <a href="{{url_for('index')}}" class="home-link">
+        <img src="/static/logo.png" alt="home logo" class="logo">
+    </a>
+    <nav class="mobile-nav">
+        <ul>
+            <li><a href="{{url_for('home1')}}">Home1</a></li>
+            <li><a href="{{url_for('home2')}}">Home2</a></li>
+            <li><a href="{{url_for('home3')}}">Home3</a></li>
+            <li><a href="https://www.airbnb.com/users/show/265716900">Contactame a +52 (686) 471-4444</a></li>
+            <li><a href="{{url_for('signup')}}">Unete</a></li>
+            <li><a href="{{url_for('login')}}">Inicia Sesion</a></li>
         </ul>
-        </div>
-
+    </nav>
 <!-- Slideshow container -->
 <div class="slideshow-container">
 
@@ -35,25 +44,25 @@
     <div class="mySlides fade">
         <div class="numbertext">1 / 4</div>
         <img src="/static/home3.jpg" class="slidepic">
-        <div class="text">View From Outside</div>
+        <div class="text">Vista por fuera</div>
       </div>
 
     <div class="mySlides fade">
       <div class="numbertext">2 / 4</div>
       <img src="/static/home3pic1.jpg" class="slidepic">
-      <div class="text">Living Room</div>
+      <div class="text">Sala</div>
     </div>
   
     <div class="mySlides fade">
       <div class="numbertext">3 / 4</div>
       <img src="/static/home3pic2.jpg" class="slidepic">
-      <div class="text">Kitchen Area</div>
+      <div class="text">Cocina</div>
     </div>
   
     <div class="mySlides fade">
       <div class="numbertext">4 / 4</div>
       <img src="/static/home3pic3.jpg" class="slidepic">
-      <div class="text">In the Room</div>
+      <div class="text">Habitacion</div>
     </div>
   
     <!-- Next and previous buttons -->
@@ -63,7 +72,8 @@
   <br>
   
   <!-- The dots/circles -->
-  <div style="text-align:center">
+  <div class="dot-container">
+
     <span class="dot" onclick="currentSlide(1)"></span>
     <span class="dot" onclick="currentSlide(2)"></span>
     <span class="dot" onclick="currentSlide(3)"></span>
