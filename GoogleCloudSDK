@@ -1,4 +1,8 @@
 https://github.com/GoogleCloudPlatform/python-docs-samples
 
 run command: git clone (paste that^) in the google cloud sdk shell terminal
+
 cd python-docs-samples/appengine/flexible/hello_world
+
+gcloud app init and then deploy 
+(init only the first time)
