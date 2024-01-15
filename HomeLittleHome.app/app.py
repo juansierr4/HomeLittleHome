@@ -1,8 +1,10 @@
 
-from flask import Flask, render_template, url_for
+from flask import Flask, render_template, url_for, redirect, request, session
 from datetime import timedelta
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
+from werkzeug.security import generate_password_hash, check_password_hash
+
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://jsier:password@localhost:3306/hlhdb'
@@ -14,6 +16,7 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(80), unique=True, nullable=False)
     email = db.Column(db.String(100), unique = True, nullable=False)
+    password = db.Column(db.String(200), nullable=False)
     date_joined = db.Column(db.Date, default=datetime.utcnow)
 
 @app.route('/')
@@ -28,11 +31,37 @@ def home2():
 @app.route('/home3')
 def home3():
     return render_template('home3.html')
-@app.route('/signup')
+@app.route('/signup', methods = ['GET', 'POST'])
 def signup():
+    if request.method == 'POST':
+        username = request.form['username']
+        email = request.form['email']
+        password = request.form['password']
+
+        hashed_password = generate_password_hash(password, method='sha256')
+
+        new_user = User(username = username, email = email, password = hashed_password)
+
+        db.session.add(new_user)
+        db.session.commit()
+
+        return redirect(url_for('login'))
+
     return render_template('signup.html')
-@app.route('/login')
+@app.route('/login', methods = ['GET', 'POST'])
 def login():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+
+        user = User.query.filter_by(username = username).first()
+
+        if user and check_password_hash(user.password, password):
+            session['username'] = user.username
+            return redirect(url_for('index'))
+        else:
+            pass #handle login failure
+
     return render_template('login.html')
 
 if __name__ == '__main__':
