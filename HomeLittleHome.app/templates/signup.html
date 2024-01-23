@@ -11,25 +11,26 @@
 <body>
     
     <div class="background">
-        <a href="{{url_for('index')}}">
-            <img src="/static/logo.png" alt="home logo" class="logo">
-        </a>
         <input type="checkbox" id="nav-toggle" class="nav-toggle" style="display: none;">
-        <label for="nav-toggle" class="hamburger-menu">
-            <span class="bar"></span>
-            <span class="bar"></span>
-            <span class="bar"></span>
-        </label>
-        <nav class="mobile-nav">
-            <ul>
-                <li><a href="{{url_for('home1')}}">Home1</a></li>
-                <li><a href="{{url_for('home2')}}">Home2</a></li>
-                <li><a href="{{url_for('home3')}}">Home3</a></li>
-                <li><a href="https://www.airbnb.com/users/show/265716900">Contactame a +52 (686) 471-4444</a></li>
-                <li><a href="{{url_for('signup')}}">Unete</a></li>
-                <li><a href="{{url_for('login')}}">Inicia Sesion</a></li>
-            </ul>
-        </nav>
+    <label for="nav-toggle" class="hamburger-menu">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+    </label>
+    <a href="{{url_for('index')}}" class="home-link">
+        <img src="/static/logo.png" alt="home logo" class="logo">
+    </a>
+    <nav class="mobile-nav">
+        <ul>
+            <li><a href="{{url_for('home1')}}">Home1</a></li>
+            <li><a href="{{url_for('home2')}}">Home2</a></li>
+            <li><a href="{{url_for('home3')}}">Home3</a></li>
+            <li><a href="https://www.airbnb.com/users/show/265716900">Contactame a +52 (686) 471-4444</a></li>
+            <li><a href="{{url_for('signup')}}">Unete</a></li>
+            <li><a href="{{url_for('login')}}">Inicia Sesion</a></li>
+            <li><a href="{{url_for('profile')}}">Perfil</a></li>
+        </ul>
+    </nav>
         <div class="container">
             <div class="row">
                 <div class="col-md-6 offset-md-3">

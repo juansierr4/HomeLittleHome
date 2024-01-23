@@ -4,13 +4,15 @@ from datetime import timedelta
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
-
+from passlib.hash import pbkdf2_sha256
+from flask_migrate import Migrate
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://jsier:password@localhost:3306/hlhdb'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
+migrate = Migrate(app,db)
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -38,7 +40,7 @@ def signup():
         email = request.form['email']
         password = request.form['password']
 
-        hashed_password = generate_password_hash(password, method='sha256')
+        hashed_password = pbkdf2_sha256.hash(password)
 
         new_user = User(username = username, email = email, password = hashed_password)
 
@@ -63,6 +65,10 @@ def login():
             pass #handle login failure
 
     return render_template('login.html')
+
+@app.route('/profile', methods = ['GET', 'POST'])
+def profile():
+    return render_template('profile.html')
 
 if __name__ == '__main__':
     with app.app_context():

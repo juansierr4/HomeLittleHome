@@ -12,7 +12,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home Little Home</title>
+    <title>Home 1</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -95,6 +95,25 @@
     <span class="dot" onclick="currentSlide(6)"></span>
 
   </div>
+
+  <div class="container">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <div class="new-booking">
+                <h2 class="bookingTitle">Reserva Nueva</h2>
+                <form action="/create-booking" method="post">
+                    <!-- Form inputs for booking -->
+                    <label for="checkin"style="color:white;">Dia de check in</label>
+                    <input type="date" id="checkin"name="checkin" required>
+                    <label for="checkout"style="color:white;">Dia de check out</label>
+                    <input type="date" id="checkin"name="checkout" required>
+                    <input type="number" name="guests" placeholder="Cantidad de invitados" required>
+                    <button type="submit" class="btn btn-primary">Reservar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
 <script>
     let slideIndex = 1;
