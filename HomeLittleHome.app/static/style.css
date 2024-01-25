@@ -345,6 +345,37 @@ background-color: #131010cc;
   color:white;
 }
 
+.container {
+  padding: 20px; /* Adjust the padding as needed */
+}
+h1, h2 {
+  color:white;
+  background-color:rgb(98, 98, 79);
+  border-radius: 5px;
+  padding: 10px;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px; /* Adjust the margin as needed */
+}
+
+th, td {
+  border: 1px solid #ddd;
+  color:white;
+  background-color:rgb(98, 98, 79);
+  padding: 10px; /* Adjust the padding as needed */
+  text-align: left;
+}
+
+.delete-button{
+  background-color: rgb(98, 98, 79);
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
 /***************************************************************************/
 
 

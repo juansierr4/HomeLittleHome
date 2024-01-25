@@ -32,22 +32,51 @@
         </ul>
     </nav>
         <div class="container">
-            <div class="row">
-                <div class="col-md-6 offset-md-3">
-                    <div class="new-booking">
-                        <h2 style="color:white;";>Make a New Booking</h2>
-                        <form action="/create-booking" method="post">
-                            <!-- Form inputs for booking -->
-                            <input type="text" name="home" placeholder="Home" required>
-                            <input type="date" name="date" required>
-                            <input type="number" name="guests" placeholder="Number of guests" required>
-                            <button type="submit" class="btn btn-primary">Book Now</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
+            <h1>Welcome to your profile, {{ user.username }}!</h1>
+            <h2>Your Bookings:</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Check-In Date</th>
+                        <th>Check-Out Date</th>
+                        <th>Number of Guests</th>
+                        <th>Booked Home</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for booking in bookings %}
+                        <tr>
+                            <td>{{ booking[0].check_in.strftime('%Y-%m-%d') }}</td>
+                            <td>{{ booking[0].check_out.strftime('%Y-%m-%d') }}</td>
+                            <td>{{ booking[0].guests }}</td>
+                            <td>{{ booking[0].home.name }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <a href="{{ url_for('logout') }}" class="btn btn-danger">Sign Out</a>
         </div>
-    </div>
+        {%for booking, home in bookings %}
+        <div class="booking-entry">
+            <p>Check-in: {{ booking.id }}</p>
+            <p>Check-out: {{ booking.check_out.strftime('%Y-%m-%d') }}</p>
+            <p>Guests: {{ booking.guests }}</p>
+            <form method="POST" action="{{ url_for('delete_booking', booking_id=booking.id)}}" id="delete-form-{{ booking.id }}">
+                <button type="button" class="delete-button" onclick="confirmCancellation({{ booking.id }})">Cancel Booking</button>
+            </form>
+        </div>
+        
+        {% endfor %}
+        <script>
+            function confirmCancellation(bookingId){
+                if (confirm("Are you sure you want to cancel your booking?")){
+                    document.getElementById("delete-form-" + bookingId).submit();
+                }
+            }
+        </script>
+        
+
+</div>
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" 
     integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

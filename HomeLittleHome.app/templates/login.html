@@ -35,7 +35,7 @@
             <div class="row">
                 <div class="col-md-6 offset-md-3">
                     <div class="signup-form">
-                        <h2 class="text-center mt-5">Log In</h2>
+                        
                         <form action="/login" method="post" class="mt-4">
                             <div class="form-group">
                                 <label for="username">Username/Email</label>
@@ -45,7 +45,11 @@
                                 <label for="password">Password</label>
                                 <input type="password" class="form-control" id="password" name="password" required>
                             </div>
+                            
                             <button type="submit" class="btn btn-primary btn-block">Log In</button>
+                            <div class="text-center mt-4">
+                                <p>Don't have an account? Sign up <a href="{{ url_for('signup') }}">here</a></p>
+                            </div>
                         </form>
                     </div>
                 </div>
