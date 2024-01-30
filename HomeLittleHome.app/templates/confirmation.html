@@ -36,16 +36,21 @@
             <li><a href="{{url_for('profile')}}">Perfil</a></li>
         </ul>
     </nav>
-    <div class="column">
-        <div><a href="{{url_for('home1')}}"><img src="/static/home1.jpg" width="33%;"></a></div>
-        <div><a href="{{url_for('home2')}}"><img src="/static/home2.jpg" width="33%;"></a></div>
-        <div><a href="{{url_for('home3')}}"><img src="/static/home3.jpg" width="33%;"></a></div>
+
+    <div class="container">
+        <div class="thank-you-message">
+        <h1>Booking Confirmation</h1>
+        <p>Thank you for your booking!</p>
     </div>
-    <div class="map">
-        <a href="https://www.google.com/maps/search/?api=1&query=32.666639,-115.407269">
-            <img src="/static/location1.png" width="40%;" height="400vh;">
-        </a>
-    </div>
+        <div class="booking-details">
+          <p><strong>Home Booked:</strong> {{ home.name }}</p>
+          <p><strong>Check-in Date:</strong> {{ booking.check_in.strftime('%Y-%m-%d') }}</p>
+          <p><strong>Check-out Date:</strong> {{ booking.check_out.strftime('%Y-%m-%d') }}</p>
+          <p><strong>Guests:</strong> {{ booking.guests }}</p>
+        </div>
+        <a href="{{ url_for('index') }}" class="return-home-link">Return to Home</a>
+      </div>
+
 </div>
 <script type="text/javascript" src="{{url_for('static', filename='index.js')}}"></script>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"

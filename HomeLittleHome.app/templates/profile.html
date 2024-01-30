@@ -32,15 +32,15 @@
         </ul>
     </nav>
         <div class="container">
-            <h1>Welcome to your profile, {{ user.username }}!</h1>
-            <h2>Your Bookings:</h2>
+            <h1>Bienvenido/a, {{ user.username }}!</h1>
+            <h2>Su Reservacion:</h2>
             <table>
                 <thead>
                     <tr>
-                        <th>Check-In Date</th>
-                        <th>Check-Out Date</th>
-                        <th>Number of Guests</th>
-                        <th>Booked Home</th>
+                        <th>Dia de Check-in</th>
+                        <th>Dia de Check-out</th>
+                        <th>Cantidad de invitados</th>
+                        <th>Su Home</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -54,13 +54,10 @@
                     {% endfor %}
                 </tbody>
             </table>
-            <a href="{{ url_for('logout') }}" class="btn btn-danger">Sign Out</a>
+            <a href="{{ url_for('logout') }}" class="btn btn-danger">Terminar Sesion</a>
         </div>
         {%for booking, home in bookings %}
         <div class="booking-entry">
-            <p>Check-in: {{ booking.id }}</p>
-            <p>Check-out: {{ booking.check_out.strftime('%Y-%m-%d') }}</p>
-            <p>Guests: {{ booking.guests }}</p>
             <form method="POST" action="{{ url_for('delete_booking', booking_id=booking.id)}}" id="delete-form-{{ booking.id }}">
                 <button type="button" class="delete-button" onclick="confirmCancellation({{ booking.id }})">Cancel Booking</button>
             </form>

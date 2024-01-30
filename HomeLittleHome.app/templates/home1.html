@@ -109,9 +109,9 @@
                     <label for="checkout"style="color:white;">Dia de check out</label>
                     <input type="date" id="checkout"name="checkout" required>
                     <input type="number" name="guests" placeholder="Cantidad de invitados" required>
-                    <label for="home_booked" style="color:white;">Select a Home to Book</label>
+                    <label for="home_booked" style="color:white;">Seleccione Home para reservar</label>
                     <select id="home_booked" name="home_booked" required>
-                      <option value="" disabled selected>Select a Home</option>
+                      <option value="" disabled selected>Elige su Home</option>
                       {% for home in available_homes %}
                           <option value="{{ home.name }}">{{ home.name }}</option>
                       {% endfor %}

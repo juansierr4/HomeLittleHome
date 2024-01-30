@@ -1,4 +1,3 @@
-
 from flask import Flask, render_template, url_for, redirect, request, session
 from datetime import timedelta
 from flask_sqlalchemy import SQLAlchemy
@@ -9,15 +8,28 @@ from flask_migrate import Migrate
 from sqlalchemy.sql import func
 from sqlalchemy import ForeignKey
 from sqlalchemy.orm import relationship
+from flask_mail import Mail, Message
+import smtplib
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
 
 app = Flask(__name__)
 app.secret_key= 'Hiq1qOTgPpYDdQv4fScNcA'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://jsier:password@localhost:3306/hlhdb'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://username:45#Kangaroo@35.203.175.67/hlhdb'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+# Configure Flask-Mail to use Gmail's SMTP server
+app.config['MAIL_SERVER'] = 'smtp.office365.com'
+app.config['MAIL_PORT'] = 587
+app.config['MAIL_USE_TLS'] = True
+app.config['MAIL_USERNAME'] = 'jwall156@hotmail.com'
+app.config['MAIL_PASSWORD'] = '3#Arrancapedos'
+app.config['MAIL_DEFAULT_SENDER'] = 'jwall156@hotmail.com'
+
 
 db = SQLAlchemy(app)
 migrate = Migrate(app,db)
-
+mail = Mail(app)
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(80), unique=True, nullable=False)
@@ -83,16 +95,18 @@ def signup():
 @app.route('/login', methods = ['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        username = request.form['username']
+        login_field = request.form['login']  # 'login' can be either username or email
         password = request.form['password']
 
-        user = User.query.filter_by(username = username).first()
+        # Attempt to find the user by username or email
+        user = User.query.filter((User.username == login_field) | (User.email == login_field)).first()
 
         if user and pbkdf2_sha256.verify(password, user.password):
             session['username'] = user.username
             return redirect(url_for('index'))
         else:
-            pass #handle login failure
+            # Handle login failure
+            return "Invalid username/email or password", 401
 
     return render_template('login.html')
 
@@ -110,7 +124,6 @@ def profile():
     else:
         return 'You must be loggeed in to view your profile'
     
-
 @app.route('/booking_appointment', methods=['POST'])
 def book_appointment():
     if 'username' not in session:
@@ -141,11 +154,40 @@ def book_appointment():
             db.session.add(new_booking)
             db.session.commit()
 
-            return redirect(url_for('index'))
+            # Send email to the user
+            send_mail("Booking Confirmation", user.email, f"Your booking for {home_booked} from {check_in} to {check_out} is confirmed.")
+
+            # Send email to the owner
+            send_mail("New Booking Notification", "jwall156@hotmail.com", f"A new booking for {home_booked} from {check_in} to {check_out} has been made.")
+
+            return redirect(url_for('confirmation', booking_id=new_booking.id))
         else:
             return 'Invalid home selected'
     else:
         return 'You must be logged in to book an appointment'
+
+@app.route('/confirmation/<int:booking_id>')
+def confirmation(booking_id):
+    # Ensure the user is logged in and has access to this booking
+    if 'username' not in session:
+        return redirect(url_for('login'))
+
+    user = User.query.filter_by(username=session['username']).first()
+
+    if not user:
+        return redirect(url_for('login'))
+
+    # Get the booking and the corresponding home details
+    booking = Booking.query.get(booking_id)
+    home = Home.query.get(booking.home_id) if booking else None
+
+    # Check if the booking exists and belongs to the logged-in user
+    if booking and booking.user_id == user.id:
+        # Render the booking confirmation page with booking and home details
+        return render_template('confirmation.html', booking=booking, home=home)
+    else:
+        # If booking does not exist or does not belong to user, redirect to index
+        return redirect(url_for('index'))
 
 @app.route('/delete_booking/<int:booking_id>', methods=['POST'])
 def delete_booking(booking_id):
@@ -168,6 +210,13 @@ def delete_booking(booking_id):
 def logout():
     session.pop('username',None)
     return redirect(url_for('login'))
+
+
+@app.route('/send_mail')
+def send_mail(subject, recipient, body):
+    msg = Message(subject, recipients=[recipient])
+    msg.body = body
+    mail.send(msg)
 
 if __name__ == '__main__':
     with app.app_context():
